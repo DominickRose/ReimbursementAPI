@@ -19,11 +19,13 @@ user_service: UserService = UserServiceImpl(user_dao)
 
 def test_1_1_login_valid():
     result = user_service.login("Test", "Test123")
-    assert result == 1
+    assert result[0] == "Emp"
+    assert result[1] == 1
 
 def test_1_2_login_valid():
     result = user_service.login("Hello", "There")
-    assert result == 2
+    assert result[0] == "MGR"
+    assert result[1] == 2
 
 def test_1_3_invalid_username():
     try:

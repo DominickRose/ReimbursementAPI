@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from entities.user import User
 from daos.user_dao import UserDao
@@ -31,7 +31,7 @@ class UserServiceImpl(UserService):
         return self.user_dao.delete_user(user_id)
 
 
-    def login(self, username: str, password: str) -> int:
+    def login(self, username: str, password: str) -> Tuple[str, int]:
         users = self.user_dao.get_all_users()
         user = [user for user in users if user.username == username]
         if len(user) == 0:
@@ -39,4 +39,4 @@ class UserServiceImpl(UserService):
         elif user[0].password != password:
             raise InvalidCredentialsError("Invalid login credentials")
         else:
-            return user[0].user_id
+            return (user[0].emp_or_mgr, user[0].user_id)

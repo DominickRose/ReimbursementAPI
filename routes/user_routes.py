@@ -61,8 +61,8 @@ def user_routes(app: Flask):
             try:
                 username = request.json['username']
                 password = request.json['password']
-                id = user_service.login(username, password)
-                return id, 200
+                user_type, id = user_service.login(username, password)
+                return jsonify({'userType':user_type, 'userId': id}), 200
             except InvalidCredentialsError as e:
                 return str(e), 422
         else:

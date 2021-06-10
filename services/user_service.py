@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from entities.user import User
 
@@ -26,5 +26,5 @@ class UserService(ABC):
         pass
 
     @abstractmethod
-    def login(self, username: str, password: str) -> int:
+    def login(self, username: str, password: str) -> Tuple[str, int]:
         pass
