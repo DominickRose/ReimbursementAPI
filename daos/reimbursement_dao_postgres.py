@@ -9,9 +9,9 @@ from utils.connection_util import connection
 
 class ReimbursementDaoPostgres(ReimbursementDao):
     def add_reimbursement(self, reimbursement: Reimbursement) -> Reimbursement:
-        sql = """insert into reimbursement (owner_id, amount, reason, status, mgr_message) values (%s, %s, %s, %s, %s) returning reimbursement_id"""
+        sql = """insert into reimbursement (owner_id, amount, reason, status, mgr_message, submit_date) values (%s, %s, %s, %s, %s, %s) returning reimbursement_id"""
         cursor = connection.cursor()
-        cursor.execute(sql, (reimbursement.owner_id, reimbursement.amount, reimbursement.reason, reimbursement.status, reimbursement.mgr_message))
+        cursor.execute(sql, (reimbursement.owner_id, reimbursement.amount, reimbursement.reason, reimbursement.status, reimbursement.mgr_message, reimbursement.date))
         connection.commit()
         reimbursement_id = cursor.fetchone()[0]
         reimbursement.reimbursement_id = reimbursement_id
@@ -37,9 +37,9 @@ class ReimbursementDaoPostgres(ReimbursementDao):
     def update_reimbursement(self, reimbursement: Reimbursement) -> Reimbursement:
         self.get_single_reimbursement(reimbursement.reimbursement_id)
 
-        sql = """update reimbursement set owner_id = %s, amount=%s, reason=%s, status=%s, mgr_message=%s where reimbursement_id = %s"""
+        sql = """update reimbursement set owner_id = %s, amount=%s, reason=%s, status=%s, mgr_message=%s, submit_date=%s where reimbursement_id = %s"""
         cursor = connection.cursor()
-        cursor.execute(sql, (reimbursement.owner_id, reimbursement.amount, reimbursement.reason, reimbursement.status, reimbursement.mgr_message, reimbursement.reimbursement_id))
+        cursor.execute(sql, (reimbursement.owner_id, reimbursement.amount, reimbursement.reason, reimbursement.status, reimbursement.mgr_message, reimbursement.date, reimbursement.reimbursement_id))
         connection.commit()
         return reimbursement
 

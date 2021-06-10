@@ -18,8 +18,8 @@ username = str(uuid.uuid4())[:20]
 test_user = User(0, username, 'x', 'Test', 'Owner', "emp")
 user_dao.add_user(test_user)
 
-test_reimbursement = Reimbursement(0, test_user.user_id, 100, '', 'Pending', '')
-test_reimbursement_2 = Reimbursement(0, test_user.user_id, 200, '', 'Pending', '')
+test_reimbursement = Reimbursement(0, test_user.user_id, 100, '', 'Pending', '', 0)
+test_reimbursement_2 = Reimbursement(0, test_user.user_id, 200, '', 'Pending', '', 0)
 
 
 def test_1_1_add_reimbursement():
@@ -51,7 +51,7 @@ def test_4_1_update_account():
     assert result.amount == 500
 
 def test_4_2_update_invalid_account():
-    invalid = Reimbursement(0, test_user.user_id, 0, '', '', '')
+    invalid = Reimbursement(0, test_user.user_id, 0, '', '', '', 0)
     try:
         reimbursement_dao.update_reimbursement(invalid)
         assert False

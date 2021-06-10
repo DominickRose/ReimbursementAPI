@@ -10,11 +10,11 @@ from unittest.mock import MagicMock
 reimbursement_dao: ReimbursementDao = ReimbursementDaoPostgres()
 
 test_list = [
-    Reimbursement(1, 1, 200, "Food", "Approved", "Sure"),
-    Reimbursement(2, 1, 400, 'Gas',  'Pending', ''),
-    Reimbursement(3, 2, 50, 'Please', 'Pending', ''),
-    Reimbursement(4, 2, 600, 'Sup',  'Rejected', 'Please give a valid reason'),
-    Reimbursement(5, 1, 1000, 'Im poor', 'Approved', 'K' )
+    Reimbursement(1, 1, 200, "Food", "Approved", "Sure", 0),
+    Reimbursement(2, 1, 400, 'Gas', 'Pending', '', 0),
+    Reimbursement(3, 2, 50, 'Please', 'Pending', '', 0),
+    Reimbursement(4, 2, 600, 'Sup', 'Rejected', 'Please give a valid reason', 0),
+    Reimbursement(5, 1, 1000, 'Im poor', 'Approved', 'K', 0)
 ]
 
 reimbursement_dao.get_all_reimbursements = MagicMock(return_value = test_list)
