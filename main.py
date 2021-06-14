@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 
 from routes.user_routes import user_routes
 from routes.reimbursement_routes import reimbursement_routes
@@ -6,6 +7,7 @@ from routes.reimbursement_routes import reimbursement_routes
 import logging
 
 app = Flask(__name__)
+CORS(app)
 logging.basicConfig(filename='record.log', level=logging.DEBUG, format=f'%s(asctime)s %(levelname)s %(message)s')
 
 user_routes(app)

@@ -70,11 +70,11 @@ def reimbursement_routes(app: Flask):
     def approve_or_deny(reimbursement_id: str):
         if not reimbursement_id.isnumeric():
             return "Reimbursement ID must be numeric", 400
-        if request.json != None and 'status' in request.json and 'mgr_message' in request.json:
+        if request.json != None and 'status' in request.json and 'mgrMessage' in request.json:
             try:
                 reimbursement = reimbursement_service.get_single_reimbursement(int(reimbursement_id))
                 reimbursement.status = request.json['status']
-                reimbursement.mgr_message = request.json['mgr_message']
+                reimbursement.mgr_message = request.json['mgrMessage']
                 updated = reimbursement_service.update_reimbursement(reimbursement)
                 return jsonify(updated.json()), 200
             except ResourceNotFoundError as e:
